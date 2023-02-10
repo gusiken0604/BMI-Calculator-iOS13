@@ -21,7 +21,7 @@ class CalculateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     @IBAction func heightSliderChanged(_ sender: UISlider) {
         heightLabel.text = "\((String(format: "%.2f", sender.value)))m"
     }
@@ -37,12 +37,12 @@ class CalculateViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToResult"{
-            let destinationVC = segue.destination as! ResultViewController
-            destinationVC.bmiValue = calculatorBrain.getBMIValue()
-            destinationVC.advice = calculatorBrain.getAdvice()
-            destinationVC.color = calculatorBrain.getColor()
-        }
+        guard segue.identifier == "goToResult", let destinationVC = segue.destination as? ResultViewController else { return }
+
+        destinationVC.bmiValue = calculatorBrain.getBMIValue()
+        destinationVC.advice = calculatorBrain.getAdvice()
+        destinationVC.color = calculatorBrain.getColor()
     }
 }
+
 
